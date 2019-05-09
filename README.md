@@ -8,8 +8,13 @@ También mostrará los lugares de hospedaje más cercanos además de poder reser
 Haré uso de las **APIs** como YouTube, Facebook, Twitter, Instagram para recopilar las ubicaciones y las fechas de subida de las mismas, y después las usaré en la API de Google Maps.
 
 ### APIs
-- Facebook
-- Instagram
-- Youtube
-- Google Maps
-- Booking
+- Facebook: Autenticación *OAuth 2.0*
+- Instagram: Autenticación *OAuth 2.0*
+      (Está construida sobre la API de Facebook)
+- Youtube: Autenticación *keyª* o *OAuth 2.0*
+- Google Maps: Autenticación *keyª* o *OAuth 2.0*
+- Booking: Autenticación *HTTP*
+
+**Todas estas APIs ofrecen una respuesta en formato *JSON***
+
+**keyª**: Esta key es la que obtienes al crear un proyecto en el entorno de desarrollo de APIs de Google.
