@@ -12,4 +12,12 @@ Haré uso de las *API* como **MountainProject** para recopilar las ubicaciones y
 - [Blablacar](https://dev.blablacar.com/docs/versions/1.0): Autenticación *key*
 
 **Todas estas APIs ofrecen una respuesta en formato *JSON***
-### Pequeño programa en la [terminal](ConsultasTerminal.py)
+#### Pequeño programa en la [terminal](ConsultasTerminal.py)
+
+### Estructura de la página
+
+Constará de las siguientes rutas:
+- "**/**" o raiz, será la página de inicio y tendrá los distintos botones y enlaces a las distintas rutas.
+- "**/busqueda**": esta página tendrá un formulario en el cual introduciremos una ciudad, un país y un número de kilómetros a la redonda, y nos mostrará (en la ruta "**/resultado**")en un mapa qué vías/bloques de escalada se encuentran en ese radio. Así como un botón que nos abrirá un formulario para introducir un origen y enseñarnos las opciones que tenemos de ir allí con **blablacar** ordenadas por precio.
+- "**/resultado**": se trata de una página producto de un formulario que contiene un mapa con diversas localizaciones así como otro posible formulario para calcular los costes de transportes (si hay) desde un origen a través de la *API de blablacar*.
+- "**/vias-recientes**": Muestra en un mapa las vías recientemente añadidas por los usuarios de *Mountain Project* así como una lista de las mismas con las respectivas calificaciones.
