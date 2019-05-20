@@ -20,8 +20,6 @@ link=str("https://api.mapbox.com/geocoding/v5/mapbox.places/"+lugar+".json")
 mapbox={"access_token":mapboxkey}
 
 r=requests.get(link,params=mapbox)
-print(r.url)
-input()
 if r.status_code == 200:
 	doc=r.json()
 	for lugares in doc["features"]:
@@ -32,6 +30,7 @@ if r.status_code == 200:
 				lon=str(lugares["center"][0])
 				print("Longitud: ",lugares["center"][0])
 				print("Latitud: ",lugares["center"][1])
+				l=lugares["place_name"]
 
 
 Dis=input("Dime un radio en kilómetros:	")
@@ -44,3 +43,25 @@ if r.status_code == 200:
 	for p in doc["routes"]:
 		print (p["name"],"-",p["type"],"-	Latitud:",p["latitude"],", Longitud:",p["longitude"])
 		print()
+
+print("Te gustaría saber que coches van hacia",l,"? [s/n]	",end="")
+respuesta=input()
+
+if respuesta.upper()=='S':
+	fn=input("Dime la ciudad de origen: ")
+	blablakey="9abf62d532d04a59a54fcec065b7307d"
+	blabla={"key":blablakey,"locale":"es_ES","_format":"json","fn":fn,"tn":lugar,"sort":"trip_price","order":"asc","cur":"EUR","accept":"application/json"}
+	r=requests.get('https://public-api.blablacar.com/api/v2/trips',params=blabla)
+
+if r.status_code == 200:
+	doc=r.json()
+	for viajes in doc["trips"]:
+		print ("Precio: ",viajes["price"]["value"],"€")
+		print ("Sitios libres: ",viajes["seats_left"],"/",viajes["seats"])
+		print ("Fecha de salida: ",viajes["departure_date"])
+		print ("Lugar de quedada: ",viajes["departure_place"]["city_name"],",",viajes["departure_place"]["address"])
+		try:
+			print ("Coche: ",viajes["car"]["make"],viajes["car"]["model"])
+		except:
+			print("Coche: ???")
+		print ("========================================")
