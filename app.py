@@ -46,4 +46,8 @@ def busqueda():
         abort(404)
     return render_template("inicio.html",features=features,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey)    
 
+@app.route('/noticias',methods=["GET","POST"])
+def noticias():
+    return render_template('noticias.html')
+
 app.run(debug=True)
