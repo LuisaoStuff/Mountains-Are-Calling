@@ -42,12 +42,53 @@ def busqueda():
                 lugar=p["name"]
                 features.append({"type": "Feature","geometry": {"type": "Point","coordinates": [lon, lat]},"properties": {"title": lugar,"icon": "marker"}})
                 { "type": "Feature", "properties": { "id": "ak16994521", "type": 2.3 }, "geometry": { "type": "Point", "coordinates": [ lon, lat, 0.0 ] } }
+
+
     except:
         abort(404)
-    return render_template("busqueda.html",features=features,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey)    
+    return render_template("busqueda.html",features=features,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey,ciudad=ciudad)    
 
 @app.route('/noticias',methods=["GET","POST"])
 def noticias():
     return render_template('noticias.html')
+
+@app.route('/busqueda/blablacar',methods=["GET","POST"])
+def blablacar():
+    destino=request.form.get("destino")
+    origen=request.form.get("origen")
+    blablakey='9abf62d532d04a59a54fcec065b7307d'
+    listaviajes=[]
+    try:
+        opciones={"locale":"es_ES","accept":"application/json","fn":origen,"tn":destino,"_format":"json","cur":"EUR","sort":"trip_price","order":"asc","key":blablakey}
+        rutas=requests.get('https://public-api.blablacar.com/api/v2/trips',params=opciones)
+        if rutas.status_code == 200:
+            doc=rutas.json()
+
+            for viajes in doc["trips"]:
+                ruta=[]
+                precio=viajes["price_with_commission"]["value"]
+                sitioslibres=viajes["seats_left"]
+                sitiostotales=viajes["seats"]
+                FechaSalida=viajes["departure_date"]
+                CiudadQuedada=viajes["departure_place"]["city_name"]
+                DireccionQuedada=viajes["departure_place"]["address"]
+
+                ruta.append(precio)
+                ruta.append(sitioslibres)
+                ruta.append(sitiostotales)
+                ruta.append(FechaSalida)
+                ruta.append(DireccionQuedada)
+                try:
+                    MarcaCoche=str(viajes["car"]["make"]+" "+viajes["car"]["model"])
+                    ruta.append(MarcaCoche)
+                except:
+                    ruta.append("???")
+
+                ruta.append(viajes["links"]["_front"])
+                listaviajes.append(ruta)
+        numviajes=len(listaviajes)
+    except:
+        abort(404)
+    return render_template("blablacar.html",numviajes=numviajes,listaviajes=listaviajes)
 
 app.run(debug=True)

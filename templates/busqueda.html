@@ -60,6 +60,8 @@
     #map { position:absolute; top:0; bottom:0; width:75%; margin-left: 13%;margin-right: 13%; margin-top: 6%;margin-bottom: 1% }
     #logo {width: 95%; margin-left: -5%;}
     #videoheader {width: 100%; position: relative; top: 0;left: 0; right: 0;margin-bottom: 10%}
+    #tarjeta {margin-top: 10%}
+    #titul {margin-top: 7%}
   </style>
   </head>
   <body>
@@ -122,44 +124,38 @@
           source: "climbing",
           filter: ["has", "point_count"],
           paint: {
-          // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-          // with three steps to implement three types of circles:
-          //   * Blue, 20px circles when point count is less than 100
-          //   * Yellow, 30px circles when point count is between 100 and 750
-          //   * Pink, 40px circles when point count is greater than or equal to 750
-          "circle-color": [
-          "step",
-          ["get", "point_count"],
-          "#51bbd6",
-          100,
-          "#f1f075",
-          750,
-          "#f28cb1"
-          ],
-          "circle-radius": [
-          "step",
-          ["get", "point_count"],
-          20,
-          100,
-          30,
-          750,
-          40
-          ]
-          }
-          });
-           
+                  "circle-color": [
+                                  "step",
+                                  ["get", "point_count"],
+                                  "#51bbd6",
+                                  100,
+                                  "#f1f075",
+                                  750,
+                                  "#f28cb1"
+                                  ],
+                  "circle-radius": [
+                                    "step",
+                                    ["get", "point_count"],
+                                    20,
+                                    100,
+                                    30,
+                                    750,
+                                    40
+                                    ]}
+                  });
+
           map.addLayer({
-          id: "cluster-count",
-          type: "symbol",
-          source: "climbing",
-          filter: ["has", "point_count"],
-          layout: {
-          "text-field": "pulsa",
-          "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-          "text-size": 12
-          }
-          });
-           
+                        id: "cluster-count",
+                        type: "symbol",
+                        source: "climbing",
+                        filter: ["has", "point_count"],
+                        layout: {
+                                "text-field": "pulsa",
+                                "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+                                "text-size": 12
+                                }
+                      });
+
           map.addLayer({
           id: "unclustered-point",
           type: "symbol",
@@ -204,14 +200,14 @@
   <div class="gtco-section">
     <div class="gtco-container">
       <div class="row">
-        <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-          <h2>Viaja con Blablacar!</h2>
-          <form action="/busqueda" method="post">
+        <div id="titul" class="col-md-8 col-md-offset-2 text-center gtco-heading">
+          <h2>Blablacar hasta {{ciudad|safe}}!</h2>
+          <form action="/busqueda/blablacar" method="post">
             <div class="row form-group">
               <div class="col-md-12">
                 <label for="fullname">Origen</label>
                 <input type="text" id="fullname" name="origen" class="form-control" required>
-                <input type="hidden" name="destino" value="{{lugar|safe}}">
+                <input type="hidden" name="destino" value="{{ciudad|safe}}">
               </div>
             </div>
             <div class="row form-group">
@@ -224,274 +220,12 @@
       </div>
       <div class="row">
 
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_1.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_1.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>New York, USA</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_2.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_2.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Seoul, South Korea</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_3.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_3.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Paris, France</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_4.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_4.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Sydney, Australia</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_5.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_5.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Greece, Europe</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_6.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_6.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Spain, Europe</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_1.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_1.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>New York, USA</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_2.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_2.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Seoul, South Korea</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_3.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_3.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Paris, France</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_4.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_4.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Sydney, Australia</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_5.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_5.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Greece, Europe</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          <a href="../static/img/img_6.jpg" class="fh5co-card-item image-popup">
-            <figure>
-              <div class="overlay"><i class="ti-plus"></i></div>
-              <img src="../static/img/img_6.jpg" alt="Image" class="img-responsive">
-            </figure>
-            <div class="fh5co-text">
-              <h2>Spain, Europe</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-              <p><span class="btn btn-primary">Schedule a Trip</span></p>
-            </div>
-          </a>
-        </div>
-
+        {% block ofertas %}{% endblock %}
+       
       </div>
     </div>
   </div>
   
-
-  
-  <div id="gtco-subscribe">
-    <div class="gtco-container">
-      <div class="row animate-box">
-        <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-          <h2>Subscribe</h2>
-          <p>Be the first to know about the new templates.</p>
-        </div>
-      </div>
-      <div class="row animate-box">
-        <div class="col-md-8 col-md-offset-2">
-          <form class="form-inline">
-            <div class="col-md-6 col-sm-6">
-              <div class="form-group">
-                <label for="email" class="sr-only">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Your Email">
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <button type="submit" class="btn btn-default btn-block">Subscribe</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer id="gtco-footer" role="contentinfo">
-    <div class="gtco-container">
-      <div class="row row-p b-md">
-
-        <div class="col-md-4">
-          <div class="gtco-widget">
-            <h3>About Us</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore eos molestias quod sint ipsum possimus temporibus officia iste perspiciatis consectetur in fugiat repudiandae cum. Totam cupiditate nostrum ut neque ab?</p>
-          </div>
-        </div>
-
-        <div class="col-md-2 col-md-push-1">
-          <div class="gtco-widget">
-            <h3>Destination</h3>
-            <ul class="gtco-footer-links">
-              <li><a href="#">Europe</a></li>
-              <li><a href="#">Australia</a></li>
-              <li><a href="#">Asia</a></li>
-              <li><a href="#">Canada</a></li>
-              <li><a href="#">Dubai</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-2 col-md-push-1">
-          <div class="gtco-widget">
-            <h3>Hotels</h3>
-            <ul class="gtco-footer-links">
-              <li><a href="#">Luxe Hotel</a></li>
-              <li><a href="#">Italy 5 Star hotel</a></li>
-              <li><a href="#">Dubai Hotel</a></li>
-              <li><a href="#">Deluxe Hotel</a></li>
-              <li><a href="#">BoraBora Hotel</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-3 col-md-push-1">
-          <div class="gtco-widget">
-            <h3>Get In Touch</h3>
-            <ul class="gtco-quick-contact">
-              <li><a href="#"><i class="icon-phone"></i> +1 234 567 890</a></li>
-              <li><a href="#"><i class="icon-mail2"></i> info@freehtml5.co</a></li>
-              <li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row copyright">
-        <div class="col-md-12">
-          <p class="pull-left">
-            <small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
-            <small class="block">Designed by <a href="https://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
-          </p>
-          <p class="pull-right">
-            <ul class="gtco-social-icons pull-right">
-              <li><a href="#"><i class="icon-twitter"></i></a></li>
-              <li><a href="#"><i class="icon-facebook"></i></a></li>
-              <li><a href="#"><i class="icon-linkedin"></i></a></li>
-              <li><a href="#"><i class="icon-dribbble"></i></a></li>
-            </ul>
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </footer>
   <!-- </div> -->
 
   </div>
