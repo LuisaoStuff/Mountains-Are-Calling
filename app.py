@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/',methods=["GET","POST"])
 def inicio():
-    return render_template("index.html")
+    return render_template("home.html")
 
 @app.route('/busqueda',methods=["GET","POST"])
 def busqueda():
@@ -44,6 +44,10 @@ def busqueda():
                 { "type": "Feature", "properties": { "id": "ak16994521", "type": 2.3 }, "geometry": { "type": "Point", "coordinates": [ lon, lat, 0.0 ] } }
     except:
         abort(404)
-    return render_template("inicio.html",features=features,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey)    
+    return render_template("busqueda.html",features=features,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey)    
+
+@app.route('/noticias',methods=["GET","POST"])
+def noticias():
+    return render_template('noticias.html')
 
 app.run(debug=True)
