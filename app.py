@@ -50,7 +50,30 @@ def busqueda():
 
 @app.route('/noticias',methods=["GET","POST"])
 def noticias():
-    return render_template('noticias.html')
+    NewsKey="24e0c4fdd07b476da1c17cadd5f3222f"
+    NewsParams={"apiKey":NewsKey,"q":"ifsc climbing","sortBy":"popularity"}
+    listanoticias=[]
+    tendencia=[]
+    try:
+        noticias=requests.get('https://newsapi.org/v2/everything',params=NewsParams)
+        if noticias.status_code == 200:
+            doc=noticias.json()
+            tendencia.append(doc["articles"][0]["title"])
+            tendencia.append(doc["articles"][0]["description"])
+            tendencia.append(doc["articles"][0]["url"])
+            tendencia.append(doc["articles"][0]["urlToImage"])
+            for i in range(1,len(doc["articles"])):
+                noticia=[]
+                noticia.append(doc["articles"][i]["title"])
+                noticia.append(doc["articles"][i]["description"])
+                noticia.append(doc["articles"][i]["url"])
+                noticia.append(doc["articles"][i]["urlToImage"])
+                noticia.append(doc["articles"][i]["source"]["name"])
+                listanoticias.append(noticia)
+        numnoticias=len(listanoticias)
+    except:
+        abort(404)
+    return render_template('noticias.html',tendencia=tendencia,listanoticias=listanoticias,numnoticias=numnoticias)
 
 @app.route('/busqueda/blablacar',methods=["GET","POST"])
 def blablacar():
