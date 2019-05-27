@@ -11,6 +11,9 @@ def busqueda():
     ciudad=request.form.get("ciudad")
     pais=request.form.get("pais")
     radio=request.form.get("radio")
+    tipo=request.form.get("tipo")
+    err="No se ha encontrado ninguna vía de esa modalidad"
+    mapa=True
     try:
         mountainkey="200468450-2feacdf11dc31b50eff73d71b8599e97"
         mapboxkey="pk.eyJ1IjoibHVpc2FvIiwiYSI6ImNqdmdkYzR5YjA1cHY0OW5vc2syOHR1Z3oifQ.TlhTDvGuB9-JJr_Vyj49zA"
@@ -20,7 +23,6 @@ def busqueda():
         pais=traduccion.json()["text"][0]
         link=str("https://api.mapbox.com/geocoding/v5/mapbox.places/"+ciudad+".json")
         mapbox={"access_token":mapboxkey}
-
         r=requests.get(link,params=mapbox)
         if r.status_code == 200:
             doc=r.json()
@@ -37,16 +39,32 @@ def busqueda():
         if r.status_code == 200:
             doc=r.json()
             for p in doc["routes"]:
-                lat=p["latitude"]
-                lon=p["longitude"]
-                lugar=p["name"]
-                features.append({"type": "Feature","geometry": {"type": "Point","coordinates": [lon, lat]},"properties": {"title": lugar,"icon": "marker"}})
-                { "type": "Feature", "properties": { "id": "ak16994521", "type": 2.3 }, "geometry": { "type": "Point", "coordinates": [ lon, lat, 0.0 ] } }
-
-
+                if tipo == "Sport":
+                    if p["type"]==tipo:
+                        lat=p["latitude"]
+                        lon=p["longitude"]
+                        lugar=p["name"]
+                elif tipo == "Trad":
+                    if p["type"]==tipo:
+                        lat=p["latitude"]
+                        lon=p["longitude"]
+                        lugar=p["name"]
+                elif tipo == "Boulder":
+                    if p["type"]==tipo:
+                        lat=p["latitude"]
+                        lon=p["longitude"]
+                        lugar=p["name"]
+                else:
+                    lat=p["latitude"]
+                    lon=p["longitude"]
+                    lugar=p["name"]
+                try:
+                    features.append({"type": "Feature","geometry": {"type": "Point","coordinates": [lon, lat]},"properties": {"title": lugar,"icon": "marker"}})
+                except:
+                    mapa=False
     except:
         abort(404)
-    return render_template("busqueda.html",features=features,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey,ciudad=ciudad)    
+    return render_template("busqueda.html",features=features,mapa=mapa,err=err,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey,ciudad=ciudad)    
 
 @app.route('/noticias',methods=["GET","POST"])
 def noticias():

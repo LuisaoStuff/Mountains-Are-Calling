@@ -62,6 +62,7 @@
     #videoheader {width: 100%; position: relative; top: 0;left: 0; right: 0;margin-bottom: 10%}
     #tarjeta {margin-top: 10%}
     #titul {margin-top: 7%}
+    #header3 {position: absolute; top:20%;}
   </style>
   </head>
   <body>
@@ -94,6 +95,15 @@
     <video autoplay muted loop id="videoheader">
       <source src="../static/vid/header1.mp4" type="video/mp4">
     </video>
+    {% if not mapa %}
+        <div class="col-md-12 col-md-offset-0 text-center" id="header3">
+          <div class="row">
+            <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+                <h1>{{err|safe}}</h1>
+            </div>
+          </div>
+        </div>
+    {% else %}
     <div id='map'></div>
     <script>
       mapboxgl.accessToken = '{{mapboxkey|safe}}';
@@ -194,7 +204,7 @@
           });
       });
     </script>
-
+  {% endif %}
   </header>
   
   <div class="gtco-section">
