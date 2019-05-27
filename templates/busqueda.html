@@ -112,7 +112,7 @@
                     "features": {{features|safe}}
                    },
           cluster: true,
-          clusterMaxZoom: 14, // Max zoom to cluster points on
+          clusterMaxZoom: 11, // Max zoom to cluster points on
           clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
           });
            
@@ -152,9 +152,9 @@
           id: "cluster-count",
           type: "symbol",
           source: "climbing",
-          filter: ["has", ""],
+          filter: ["has", "point_count"],
           layout: {
-          "text-field": "{point_count_abbreviated}",
+          "text-field": "pulsa",
           "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
           "text-size": 12
           }
