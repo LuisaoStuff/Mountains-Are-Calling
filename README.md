@@ -7,11 +7,14 @@ _'Mountains are calling'_ es una aplicación que se encarga de recoger los datos
 Haré uso de las *API* como **MountainProject** para recopilar las ubicaciones y las fechas de subida de las mismas, y después las usaré en la *API* de **Mapbox** además de **blablacar**.
 
 ### APIs
-- [MapBox](https://docs.mapbox.com/api/): Autenticación *key*
-- [MountainProject](https://www.mountainproject.com/data): Autenticación *key*
-- [Blablacar](https://dev.blablacar.com/docs/versions/1.0): Autenticación *key*
+- [MapBox](https://docs.mapbox.com/api/)
+- [MountainProject](https://www.mountainproject.com/data)
+- [Blablacar](https://dev.blablacar.com/docs/versions/1.0)
+- [NewsApi](https://newsapi.org/)
+- [Youtube Data API](https://developers.google.com/youtube/v3/)
+- [Yandex Translate](https://tech.yandex.com/translate/doc/dg/concepts/About-docpage/)
 
-**Todas estas APIs ofrecen una respuesta en formato *JSON***
+**Todas estas APIs ofrecen una respuesta en formato _JSON_ y su modo de autenticación es por key**
 #### Pequeño programa en la [terminal](ConsultasTerminal.py)
 
 ### Estructura de la página
