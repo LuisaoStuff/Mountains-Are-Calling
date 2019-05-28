@@ -38,3 +38,7 @@ Algunas capturas de la página desplegada en heroku.
 <a href="https://imgur.com/psGAAkG"><img src="https://i.imgur.com/psGAAkG.png" title="source: imgur.com" /></a>
 
 <a href="https://imgur.com/ropEiSE"><img src="https://i.imgur.com/ropEiSE.png" title="source: imgur.com" /></a>
+
+<a href="https://imgur.com/3sqFjec"><img src="https://i.imgur.com/3sqFjec.png" title="source: imgur.com" /></a>
+
+<a href="https://imgur.com/CMzsDyF"><img src="https://i.imgur.com/CMzsDyF.png" title="source: imgur.com" /></a>
