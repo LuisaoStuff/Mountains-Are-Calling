@@ -21,6 +21,18 @@ Haré uso de las *API* como **MountainProject** para recopilar las ubicaciones y
 
 Constará de las siguientes rutas:
 - "**/**" o raiz, será la página de inicio y tendrá los distintos botones y enlaces a las distintas rutas.
-- "**/busqueda**": esta página tendrá un formulario en el cual introduciremos una ciudad, un país y un número de kilómetros a la redonda, y nos mostrará (en la ruta "**/resultado**")en un mapa qué vías/bloques de escalada se encuentran en ese radio. Así como un botón que nos abrirá un formulario para introducir un origen y enseñarnos las opciones que tenemos de ir allí con **blablacar** ordenadas por precio.
-- "**/resultado**": se trata de una página producto de un formulario que contiene un mapa con diversas localizaciones así como otro posible formulario para calcular los costes de transportes (si hay) desde un origen a través de la *API de blablacar*.
-- "**/vias-recientes**": Muestra en un mapa las vías recientemente añadidas por los usuarios de *Mountain Project* así como una lista de las mismas con las respectivas calificaciones.
+- "**/busqueda**": esta página tendrá un formulario en el cual introduciremos una ciudad, un país y un número de kilómetros a la redonda, y nos mostrará (en la ruta "**/blablacar**")en un mapa qué vías/bloques de escalada se encuentran en ese radio. Así como un botón que nos abrirá un formulario para introducir un origen y enseñarnos las opciones que tenemos de ir allí con **blablacar** ordenadas por precio.
+- "**/blablacar**": se trata de una página producto de un formulario que contiene un mapa con diversas localizaciones así como otro posible formulario para calcular los costes de transportes (si hay) desde un origen a través de la *API de blablacar*.
+- "**/noticias**": Muestra las noticias más recientes relacionadas con la Federación Internacional de la Escalada Deportiva (_ifsc_), así como sus competiciones y competidores.
+- "**/youtube**": Muestra los 3 videos más recientes de una lista de 5 canales relacionados con la escalada que recomiendo personalmente.
+
+### Aplicación web en heroku
+Algunas capturas de la página desplegada en heroku.
+
+[<a href="https://imgur.com/ymPVKkX"><img src="https://i.imgur.com/ymPVKkX.png" title="source: imgur.com" /></a>]
+
+[<a href="https://imgur.com/ymPVKkX"><img src="https://i.imgur.com/ymPVKkX.png" title="source: imgur.com" /></a>]
+
+[<a href="https://imgur.com/qE5ACK1"><img src="https://i.imgur.com/qE5ACK1.png" title="source: imgur.com" /></a>]
+
+[<a href="https://imgur.com/psGAAkG"><img src="https://i.imgur.com/psGAAkG.png" title="source: imgur.com" /></a>]
