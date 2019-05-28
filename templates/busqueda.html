@@ -100,6 +100,7 @@
           <div class="row">
             <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
                 <h1>{{err|safe}}</h1>
+                {% block viajes %}{% endblock %}
             </div>
           </div>
         </div>
@@ -211,13 +212,14 @@
     <div class="gtco-container">
       <div class="row">
         <div id="titul" class="col-md-8 col-md-offset-2 text-center gtco-heading">
-          <h2>Blablacar hasta {{ciudad|safe}}!</h2>
+          {% if features|length %}
+          <h2>Blablacar hasta {{destino|safe}}!</h2>
           <form action="/busqueda/blablacar" method="post">
             <div class="row form-group">
               <div class="col-md-12">
                 <label for="fullname">Origen</label>
                 <input type="text" id="fullname" name="origen" class="form-control" required>
-                <input type="hidden" name="destino" value="{{ciudad|safe}}">
+                <input type="hidden" name="destino" value="{{destino|safe}}">
               </div>
             </div>
             <div class="row form-group">
@@ -225,7 +227,8 @@
                 <input type="submit" class="btn btn-primary btn-block" value="Buscar">
               </div>
             </div>
-          </form> 
+          </form>
+          {% endif %}
         </div>
       </div>
       <div class="row">

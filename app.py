@@ -68,7 +68,7 @@ def busqueda():
                     mapa=False
     except:
         abort(404)
-    return render_template("busqueda.html",features=features,mapa=mapa,err=err,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey,ciudad=ciudad)    
+    return render_template("busqueda.html",features=features,mapa=mapa,err=err,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey,destino=ciudad)    
 
 @app.route('/noticias',methods=["GET"])
 def noticias():
@@ -76,6 +76,7 @@ def noticias():
     NewsParams={"apiKey":NewsKey,"q":"ifsc climbing","sortBy":"popularity"}
     listanoticias=[]
     tendencia=[]
+    Contador=1
     try:
         noticias=requests.get('https://newsapi.org/v2/everything',params=NewsParams)
         if noticias.status_code == 200:
@@ -95,7 +96,7 @@ def noticias():
         numnoticias=len(listanoticias)
     except:
         abort(404)
-    return render_template('noticias.html',tendencia=tendencia,listanoticias=listanoticias,numnoticias=numnoticias)
+    return render_template('noticias.html',tendencia=tendencia,listanoticias=listanoticias,numnoticias=numnoticias,Contador=Contador)
 
 @app.route('/busqueda/blablacar',methods=["GET","POST"])
 def blablacar():
@@ -134,7 +135,7 @@ def blablacar():
         numviajes=len(listaviajes)
     except:
         abort(404)
-    return render_template("blablacar.html",numviajes=numviajes,listaviajes=listaviajes)
+    return render_template("blablacar.html",numviajes=numviajes,listaviajes=listaviajes,destino=destino,origen=origen)
 
 @app.route('/youtube',methods=["GET","POST"])
 def canales():
