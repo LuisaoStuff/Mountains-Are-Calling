@@ -5,6 +5,8 @@ import os
 
 app = Flask(__name__)	
 
+port=os.environ["PORT"]
+
 @app.route('/',methods=["GET","POST"])
 def inicio():
     return render_template("home.html")
@@ -19,9 +21,9 @@ def busqueda():
     mapa=True
     try:
 
-        mountainkey=os.popen("set `cat ../ApiKeys | grep MountainProject` && echo $2").read().strip()
-        mapboxkey=os.popen("set `cat ../ApiKeys | grep Mapbox` && echo $2").read().strip()
-        yandexkey=os.popen("set `cat ../ApiKeys | grep Yandex` && echo $2").read().strip()
+        mountainkey=os.environ['MountainProject']
+        mapboxkey=os.environ['Mapbox']
+        yandexkey=os.environ['Yandex']
         yandex={"key":yandexkey,"text":pais,"lang":"es-en"}
         traduccion=requests.get('https://translate.yandex.net/api/v1.5/tr.json/translate',params=yandex)
         pais=traduccion.json()["text"][0]
@@ -72,7 +74,7 @@ def busqueda():
 
 @app.route('/noticias',methods=["GET"])
 def noticias():
-    NewsKey=os.popen("set `cat ../ApiKeys | grep NewsApi` && echo $2").read().strip()
+    NewsKey=os.environ['NewsApi']
     NewsParams={"apiKey":NewsKey,"q":"ifsc climbing","sortBy":"popularity"}
     listanoticias=[]
     tendencia=[]
@@ -102,7 +104,7 @@ def noticias():
 def blablacar():
     destino=request.form.get("destino")
     origen=request.form.get("origen")
-    blablakey=os.popen("set `cat ../ApiKeys | grep Blablacar` && echo $2").read().strip()
+    blablakey=os.environ['Blablacar']
     listaviajes=[]
     try:
         opciones={"locale":"es_ES","accept":"application/json","fn":origen,"tn":destino,"_format":"json","cur":"EUR","sort":"trip_price","order":"asc","key":blablakey}
@@ -140,7 +142,7 @@ def blablacar():
 @app.route('/youtube',methods=["GET","POST"])
 def canales():
     link='https://www.googleapis.com/youtube/v3/search'
-    youKey=os.popen("set `cat ../ApiKeys | grep Youtube` && echo $2").read().strip()
+    youKey=os.environ['Youtube']
     Canales=['UC2MGuhIaOP6YLpUx106kTQw','UC_gSotrFVZ_PiAxo3fTQVuQ','UC8eNyF9eYwgr_K-Nl4gSHWw','UCgtOMaHBiYvsRYZ77utf8FQ','UCt_aqQDpGzyRDALTVyBe7xg']
     listaCanales=[]
     videosCanal={}
@@ -174,4 +176,4 @@ def canales():
         abort(404)
     return render_template("Youtube.html",listaCanales=listaCanales,Quota=Quota)
 
-app.run(debug=True)
+app.run('0.0.0.0',int(port),debug=True)
