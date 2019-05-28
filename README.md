@@ -29,10 +29,10 @@ Constará de las siguientes rutas:
 ### Aplicación web en heroku
 Algunas capturas de la página desplegada en heroku.
 
-[<a href="https://imgur.com/ymPVKkX"><img src="https://i.imgur.com/ymPVKkX.png" title="source: imgur.com" /></a>]
+<a href="https://imgur.com/ymPVKkX"><img src="https://i.imgur.com/ymPVKkX.png" title="source: imgur.com" /></a>
 
-[<a href="https://imgur.com/ymPVKkX"><img src="https://i.imgur.com/ymPVKkX.png" title="source: imgur.com" /></a>]
+<a href="https://imgur.com/ymPVKkX"><img src="https://i.imgur.com/ymPVKkX.png" title="source: imgur.com" /></a>
 
-[<a href="https://imgur.com/qE5ACK1"><img src="https://i.imgur.com/qE5ACK1.png" title="source: imgur.com" /></a>]
+<a href="https://imgur.com/qE5ACK1"><img src="https://i.imgur.com/qE5ACK1.png" title="source: imgur.com" /></a>
 
-[<a href="https://imgur.com/psGAAkG"><img src="https://i.imgur.com/psGAAkG.png" title="source: imgur.com" /></a>]
+<a href="https://imgur.com/psGAAkG"><img src="https://i.imgur.com/psGAAkG.png" title="source: imgur.com" /></a>
