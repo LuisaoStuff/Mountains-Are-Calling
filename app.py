@@ -1,5 +1,8 @@
 from flask import Flask, render_template,request,abort
 import requests
+import json
+import os
+
 app = Flask(__name__)	
 
 @app.route('/',methods=["GET","POST"])
@@ -15,9 +18,10 @@ def busqueda():
     err="No se ha encontrado ninguna vía de esa modalidad"
     mapa=True
     try:
-        mountainkey="200468450-2feacdf11dc31b50eff73d71b8599e97"
-        mapboxkey="pk.eyJ1IjoibHVpc2FvIiwiYSI6ImNqdmdkYzR5YjA1cHY0OW5vc2syOHR1Z3oifQ.TlhTDvGuB9-JJr_Vyj49zA"
-        yandexkey="trnsl.1.1.20190515T102841Z.48d3d2036e46a0f2.0f94d2311312265104e71b5ddc061cc1370ed213"
+
+        mountainkey=os.popen("set `cat ../ApiKeys | grep MountainProject` && echo $2").read().strip()
+        mapboxkey=os.popen("set `cat ../ApiKeys | grep Mapbox` && echo $2").read().strip()
+        yandexkey=os.popen("set `cat ../ApiKeys | grep Yandex` && echo $2").read().strip()
         yandex={"key":yandexkey,"text":pais,"lang":"es-en"}
         traduccion=requests.get('https://translate.yandex.net/api/v1.5/tr.json/translate',params=yandex)
         pais=traduccion.json()["text"][0]
@@ -68,7 +72,7 @@ def busqueda():
 
 @app.route('/noticias',methods=["GET"])
 def noticias():
-    NewsKey="24e0c4fdd07b476da1c17cadd5f3222f"
+    NewsKey=os.popen("set `cat ../ApiKeys | grep NewsApi` && echo $2").read().strip()
     NewsParams={"apiKey":NewsKey,"q":"ifsc climbing","sortBy":"popularity"}
     listanoticias=[]
     tendencia=[]
@@ -97,7 +101,7 @@ def noticias():
 def blablacar():
     destino=request.form.get("destino")
     origen=request.form.get("origen")
-    blablakey='9abf62d532d04a59a54fcec065b7307d'
+    blablakey=os.popen("set `cat ../ApiKeys | grep Blablacar` && echo $2").read().strip()
     listaviajes=[]
     try:
         opciones={"locale":"es_ES","accept":"application/json","fn":origen,"tn":destino,"_format":"json","cur":"EUR","sort":"trip_price","order":"asc","key":blablakey}
@@ -135,7 +139,7 @@ def blablacar():
 @app.route('/youtube',methods=["GET","POST"])
 def canales():
     link='https://www.googleapis.com/youtube/v3/search'
-    youKey='AIzaSyCxsvPIOLrbEXFBtXEkAEHIJ-vOAq37cOU'
+    youKey=os.popen("set `cat ../ApiKeys | grep Youtube` && echo $2").read().strip()
     Canales=['UC2MGuhIaOP6YLpUx106kTQw','UC_gSotrFVZ_PiAxo3fTQVuQ','UC8eNyF9eYwgr_K-Nl4gSHWw','UCgtOMaHBiYvsRYZ77utf8FQ','UCt_aqQDpGzyRDALTVyBe7xg']
     listaCanales=[]
     videosCanal={}
