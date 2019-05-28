@@ -66,7 +66,7 @@ def busqueda():
         abort(404)
     return render_template("busqueda.html",features=features,mapa=mapa,err=err,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey,ciudad=ciudad)    
 
-@app.route('/noticias',methods=["GET","POST"])
+@app.route('/noticias',methods=["GET"])
 def noticias():
     NewsKey="24e0c4fdd07b476da1c17cadd5f3222f"
     NewsParams={"apiKey":NewsKey,"q":"ifsc climbing","sortBy":"popularity"}
@@ -131,5 +131,42 @@ def blablacar():
     except:
         abort(404)
     return render_template("blablacar.html",numviajes=numviajes,listaviajes=listaviajes)
+
+@app.route('/youtube',methods=["GET","POST"])
+def canales():
+    link='https://www.googleapis.com/youtube/v3/search'
+    youKey='AIzaSyCxsvPIOLrbEXFBtXEkAEHIJ-vOAq37cOU'
+    Canales=['UC2MGuhIaOP6YLpUx106kTQw','UC_gSotrFVZ_PiAxo3fTQVuQ','UC8eNyF9eYwgr_K-Nl4gSHWw','UCgtOMaHBiYvsRYZ77utf8FQ','UCt_aqQDpGzyRDALTVyBe7xg']
+    listaCanales=[]
+    videosCanal={}
+    tresvideos=[]
+    Quota=True
+    try:
+        for identificador in Canales:
+            youtubeparams={"part":"snippet","maxResults":"3","order":"date","type":"video","key":youKey,"channelId":identificador}
+            videos=requests.get(link,params=youtubeparams)
+            if videos.status_code == 200:
+                lista=videos.json()
+                videosCanal={}
+                tresvideos=[]
+                for video in lista["items"]:
+                    info=[]
+                    videoid=video["id"]["videoId"]
+                    titulo=video["snippet"]["title"]
+                    miniatura=video["snippet"]["thumbnails"]["high"]["url"]
+                    Canal=video["snippet"]["channelTitle"]
+                    info.append(videoid)
+                    info.append(titulo)
+                    info.append(miniatura)
+                        
+                    tresvideos.append(info)
+
+                videosCanal={"videos":tresvideos,"nombre":Canal}
+                listaCanales.append(videosCanal)
+            elif videos.status_code == 403:
+                Quota=False
+    except:
+        abort(404)
+    return render_template("Youtube.html",listaCanales=listaCanales,Quota=Quota)
 
 app.run(debug=True)
