@@ -70,7 +70,7 @@ def busqueda():
                     mapa=False
     except:
         abort(404)
-    return render_template("busqueda.html",features=features,mapa=mapa,err=err,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey,destino=ciudad)    
+    return render_template("busqueda.html",features=features,err=err,latitud=latitud,longitud=longitud,mapboxkey=mapboxkey,destino=ciudad)    
 
 @app.route('/noticias',methods=["GET"])
 def noticias():

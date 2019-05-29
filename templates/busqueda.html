@@ -51,7 +51,6 @@
   <script src="../static/js/respond.min.js"></script>
   <![endif]-->
   <meta charset='utf-8' />
-  <title>Draw GeoJSON points</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
@@ -96,16 +95,7 @@
     <video autoplay muted loop id="videoheader">
       <source src="../static/vid/header1.mp4" type="video/mp4">
     </video>
-    {% if not mapa %}
-        <div class="col-md-12 col-md-offset-0 text-center" id="header3">
-          <div class="row">
-            <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
-                <h1>{{err|safe}}</h1>
-                {% block viajes %}{% endblock %}
-            </div>
-          </div>
-        </div>
-    {% else %}
+    {% if features|length %}
     <div id='map'></div>
     <script>
       mapboxgl.accessToken = '{{mapboxkey|safe}}';
@@ -206,6 +196,15 @@
           });
       });
     </script>
+    {% else %}
+    <div class="col-md-12 col-md-offset-0 text-center" id="header3">
+      <div class="row">
+        <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+          <h1>{{err|safe}}</h1>
+          {% block viajes %}{% endblock %}
+        </div>
+      </div>
+    </div>
   {% endif %}
   </header>
   
